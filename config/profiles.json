@@ -1,0 +1,92 @@
+{
+  "default": "code",
+  "profiles": {
+    "research": {
+      "route": "long-context",
+      "loopMaxIterations": 16,
+      "wallclockMs": 1500000,
+      "contextTokenBudget": 18000,
+      "toolAllow": [
+        "orch.*",
+        "sandbox.*",
+        "mcp__tavily__*",
+        "mcp__context7__*",
+        "mcp__browserless__*",
+        "mcp__azure-doc__*",
+        "mcp__azure-vision__*",
+        "mcp__pollinations__*"
+      ],
+      "autoApprove": [
+        "orch.*",
+        "sandbox.*",
+        "mcp__tavily__*",
+        "mcp__context7__*",
+        "mcp__azure-doc__*",
+        "mcp__azure-vision__*"
+      ],
+      "review": ["mcp__*"],
+      "deny": ["mcp__github*", "mcp__neon*", "mcp__cloudflare*", "mcp__cloudinary*"],
+      "sandboxEnabled": true,
+      "memoryWriteback": true,
+      "temperature": 0.1
+    },
+    "chat": {
+      "route": "balanced",
+      "loopMaxIterations": 6,
+      "wallclockMs": 180000,
+      "contextTokenBudget": 9000,
+      "toolAllow": [
+        "orch.time_now",
+        "orch.fetch_url",
+        "orch.skills_list",
+        "orch.skills_read",
+        "mcp__tavily__*",
+        "mcp__context7__*",
+        "mcp__pollinations__*",
+        "mcp__azure-vision__*",
+        "mcp__azure-doc__*"
+      ],
+      "autoApprove": ["orch.*", "mcp__tavily__*", "mcp__context7__*", "mcp__pollinations__*", "mcp__azure-vision__*", "mcp__azure-doc__*"],
+      "review": [],
+      "deny": ["sandbox.*", "mcp__github*"],
+      "sandboxEnabled": false,
+      "memoryWriteback": true,
+      "temperature": 0.4
+    },
+    "code": {
+      "route": "reasoning",
+      "loopMaxIterations": 12,
+      "wallclockMs": 900000,
+      "contextTokenBudget": 11000,
+      "toolAllow": [
+        "orch.*",
+        "sandbox.*",
+        "mcp__tavily__*",
+        "mcp__context7__*",
+        "mcp__browserless__*",
+        "mcp__pollinations__*",
+        "mcp__azure-vision__*",
+        "mcp__azure-doc__*"
+      ],
+      "autoApprove": ["orch.*", "sandbox.*"],
+      "review": ["mcp__*"],
+      "deny": ["mcp__neon*", "mcp__github*"],
+      "sandboxEnabled": true,
+      "memoryWriteback": true,
+      "temperature": 0.2
+    },
+    "power": {
+      "route": "reasoning",
+      "loopMaxIterations": 20,
+      "wallclockMs": 1200000,
+      "contextTokenBudget": 14000,
+      "toolAllow": ["*"],
+      "autoApprove": ["orch.*", "sandbox.*", "mcp__tavily__*", "mcp__context7__*", "mcp__browserless__*", "mcp__pollinations__*", "mcp__azure-vision__*", "mcp__azure-doc__*", "mcp__cloudflare__*"],
+      "review": ["mcp__*"],
+      "deny": [],
+      "sandboxEnabled": true,
+      "memoryWriteback": true,
+      "temperature": 0.2
+    }
+  }
+}

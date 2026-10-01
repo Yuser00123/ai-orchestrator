@@ -1,0 +1,92 @@
+{
+  "servers": [
+    {
+      "id": "tavily",
+      "transport": "http",
+      "url": "https://mcp.tavily.com/mcp/",
+      "queryFromEnv": { "tavilyApiKey": "MCP_TAVILY_API_KEY" },
+      "timeoutMs": 30000,
+      "enabled": true
+    },
+    {
+      "id": "context7",
+      "transport": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "timeoutMs": 30000,
+      "enabled": true
+    },
+    {
+      "id": "browserless",
+      "transport": "http",
+      "url": "https://mcp.browserless.io/mcp",
+      "headers": { "Authorization": "Bearer $MCP_BROWSERLESS_TOKEN" },
+      "timeoutMs": 120000,
+      "enabled": true
+    },
+    {
+      "id": "azure-vision",
+      "transport": "http",
+      "url": "https://azure-vision-mcp.ai.studio/api/mcp",
+      "headers": { "Authorization": "Bearer $MCP_AZURE_VISION_TOKEN" },
+      "timeoutMs": 60000,
+      "enabled": true
+    },
+    {
+      "id": "azure-doc",
+      "transport": "http",
+      "url": "https://azure-doc-mcp.vercel.app/api/mcp",
+      "headers": { "Authorization": "Bearer $MCP_AZURE_DOC_TOKEN" },
+      "timeoutMs": 60000,
+      "enabled": true
+    },
+    {
+      "id": "pollinations",
+      "transport": "http",
+      "url": "https://gen.pollinations.ai/mcp/pollinations",
+      "headers": { "Authorization": "Bearer $MCP_POLLINATIONS_KEY" },
+      "timeoutMs": 90000,
+      "enabled": true
+    },
+    {
+      "id": "github",
+      "transport": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": { "Authorization": "Bearer $MCP_GITHUB_PAT" },
+      "allowedTools": ["get_*", "list_*", "search_*", "fetch_*", "read_*"],
+      "deniedTools": ["*delete*", "*merge*", "*push*", "*close*", "create_*"],
+      "timeoutMs": 60000,
+      "enabled": false
+    },
+    {
+      "id": "cloudflare",
+      "transport": "http",
+      "url": "https://mcp.cloudflare.com/mcp",
+      "headers": { "Authorization": "Bearer $MCP_CLOUDFLARE_TOKEN" },
+      "timeoutMs": 60000,
+      "enabled": false
+    },
+    {
+      "id": "cloudinary",
+      "transport": "http",
+      "url": "https://asset-management.mcp.cloudinary.com/mcp",
+      "headers": { "Authorization": "Basic $MCP_CLOUDINARY_BASIC" },
+      "timeoutMs": 60000,
+      "enabled": false
+    },
+    {
+      "id": "neon",
+      "transport": "http",
+      "url": "https://mcp.neon.tech/mcp",
+      "headers": { "Authorization": "Bearer $MCP_NEON_KEY" },
+      "timeoutMs": 60000,
+      "enabled": false
+    },
+    {
+      "id": "demo-stdio",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem@0.6.2", "/tmp/orchestrator-workspace"],
+      "enabled": false
+    }
+  ]
+}

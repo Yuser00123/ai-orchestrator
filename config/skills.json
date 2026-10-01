@@ -1,0 +1,9 @@
+{
+  "dir": "",
+  "repo": "Yuser00123/agent-skills",
+  "ref": "main",
+  "tokenEnv": "GITHUB_TOKEN",
+  "cacheDir": "./data/skills",
+  "syncOnBoot": true,
+  "maxFileBytes": 65536
+}
