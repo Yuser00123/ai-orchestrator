@@ -67,14 +67,14 @@ Everything below is verified against the code in this repo (`src/config.ts` sche
 | `MCP_BROWSERLESS_TOKEN` | Browserless (real browsing/screenshots) |
 | `MCP_AZURE_VISION_TOKEN` | your Azure vision server |
 | `MCP_AZURE_DOC_TOKEN` | your Azure doc server |
-| `MCP_POLLINATIONS_KEY` | Pollinations (image gen — it now requires a key) |
-| `MCP_GITHUB_PAT` | GitHub Copilot MCP (server also `enabled:false` by default) |
-| `MCP_CLOUDFLARE_TOKEN` | Cloudflare MCP (`enabled:false` default) |
-| `MCP_CLOUDINARY_BASIC` | Cloudinary (base64 of `key:secret`, `enabled:false` default) |
-| `MCP_NEON_KEY` | Neon MCP (`enabled:false` default — DB-admin tools are intentionally off for agents) |
+| `MCP_POLLINATIONS_KEY` | Pollinations image/search — **key required** as of 2026-10 (endpoint 401s without one; your old "no auth" note is stale). Get one at enter.pollinations.ai |
+| `MCP_GITHUB_PAT` | GitHub Copilot MCP (`Authorization: Bearer <PAT>` is the official headless auth; OAuth only exists for IDE clients. Fine-grained PAT, narrow scopes. Server also `enabled:false` by default) |
+| `MCP_CLOUDFLARE_TOKEN` | Cloudflare API MCP — accepts an API token as Bearer (OAuth is the browser flow alternative). `enabled:false` default |
+| `MCP_CLOUDINARY_URL` | Cloudinary — full `cloudinary://API_KEY:API_SECRET@CLOUD_NAME` string in ONE var (their docs' `cloudinary-url` header; not basic auth). `enabled:false` default |
+| `MCP_NEON_KEY` | Neon MCP — Bearer API key from console.neon.tech (`enabled:false` default). Optional `?readonly=true` on the URL gives a read-only variant |
 | `GITHUB_TOKEN` | optional; raises GitHub API rate for skills sync (anonymous works too) |
 
-Missing token ⇒ **that server self-disables at boot** (tools just aren't offered); it never crashes the orchestrator.
+Missing token ⇒ **that server self-disables at boot** (tools just aren't offered); it never crashes the orchestrator. One entry needs **no** token at all: **Context7** (`mcp.context7.com/mcp`) — verified working keyless with a bare `initialize` (HTTP 200, 2026-10-01); a key only raises rate limits. The two custom Azure servers confirmed 401-without-token (expect your `AUTH_TOKEN` as Bearer; scheme beyond that is on your deployments). All nine remote endpoints were probed live on 2026-10-01: 401 auth-required for github/cloudflare/browserless/tavily/pollinations/cloudinary/neon/azure×2, 200 for context7 — matching exactly one credential per server as above. The 2 stdio servers (memory, filesystem) need no auth by nature; filesystem needs its allowed-root path in `args`.
 
 ---
 

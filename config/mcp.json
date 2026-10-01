@@ -69,7 +69,7 @@
       "id": "cloudinary",
       "transport": "http",
       "url": "https://asset-management.mcp.cloudinary.com/mcp",
-      "headers": { "Authorization": "Basic $MCP_CLOUDINARY_BASIC" },
+      "headers": { "cloudinary-url": "$MCP_CLOUDINARY_URL" },
       "timeoutMs": 60000,
       "enabled": false
     },
