@@ -55,6 +55,10 @@ export function toPublicError(err: unknown): { code: string; message: string; st
   if (err instanceof OrchestratorError) {
     return { code: err.code, message: err.message, status: err.status };
   }
+  /* Fastify's own request-level failures must not surface as 500 (they are client errors). */
+  const code = (err as { code?: string })?.code ?? '';
+  if (code.startsWith('FST_ERR_CTP')) return { code: 'unsupported_media_type', message: 'Content-Type must be application/json', status: 415 };
+  if (code === 'FST_ERR_VALIDATION' || code === 'FST_ERR_BODY_TOO_LARGE') return { code: 'invalid_request', message: 'body failed request validation', status: 400 };
   const msg = err instanceof Error ? err.message : String(err);
   return { code: 'internal_error', message: msg.slice(0, 400), status: 500 };
 }

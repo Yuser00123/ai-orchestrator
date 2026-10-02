@@ -24,7 +24,7 @@
         "mcp__azure-doc__*",
         "mcp__azure-vision__*"
       ],
-      "review": ["mcp__*"],
+      "review": [],
       "deny": ["mcp__github*", "mcp__neon*", "mcp__cloudflare*", "mcp__cloudinary*"],
       "sandboxEnabled": true,
       "memoryWriteback": true,

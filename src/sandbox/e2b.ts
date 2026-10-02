@@ -143,10 +143,15 @@ class InnerSandbox {
   }
 
   async readBase64(p: string): Promise<string> {
+    // e2b 1.x: files.read(path, { format: 'bytes' }) → Uint8Array. (There is NO 'base64'
+    // format and unknown opts are silently ignored — passing a wrong key returns raw text,
+    // which the caller would then corrupt by base64-decoding it. 'bytes' is the only
+    // binary-safe option; encode ourselves.)
     try {
-      return String(await this.sbx.files.read(p, { type: 'base64' }));
+      const bytes = await this.sbx.files.read(p, { format: 'bytes' });
+      return Buffer.from(bytes).toString('base64');
     } catch {
-      const text = String(await this.sbx.files.read(p));
+      const text = String(await this.sbx.files.read(p, { format: 'text' }));
       return Buffer.from(text, 'utf8').toString('base64');
     }
   }

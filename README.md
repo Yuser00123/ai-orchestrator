@@ -25,6 +25,7 @@ Gateway contract spike (M0 — run this first, once): `GATEWAY_BASE_URL=... GATE
 npm run check          # tsc --noEmit
 npm run check:arch     # module-boundary enforcement (one module, one face)
 npm test              # 33 tests: loop e2e against the real engine + security units
+python3 scripts/verify_report.py --url <deployment> # live API audit → report.txt
 ```
 
 ## Endpoints (frontend contract)
